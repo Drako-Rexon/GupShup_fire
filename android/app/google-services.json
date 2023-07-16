@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "912625053947",
+    "project_id": "gupshup-chat-fire",
+    "storage_bucket": "gupshup-chat-fire.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912625053947:android:580a9ccd1a92c329fb405e",
+        "android_client_info": {
+          "package_name": "com.example.gupshup_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "912625053947-6cvc7rpngis31n29fptmdps1h1eqemqp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gupshup_chat",
+            "certificate_hash": "1d4f6c1bda93ce3dfd660278678db897c1041eb1"
+          }
+        },
+        {
+          "client_id": "912625053947-qnn8e5bd3esu689uqg1sfrthegg0qpq3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCH9tSdqJcE65WTUXYMfYpK-HnwDcDZb7k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "912625053947-qnn8e5bd3esu689uqg1sfrthegg0qpq3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
