@@ -10,17 +10,20 @@ class HelperFunctions {
 
   static Future<bool> saveUserLoggedInStatus(bool isUserLoggedIn) async {
     SharedPreferences sf = await SharedPreferences.getInstance();
+    print(sf.get(userLoggedInKey));
     return await sf.setBool(userLoggedInKey, isUserLoggedIn);
   }
 
-  static Future<bool> saveUsernameSF(bool username) async {
+  static Future<bool> saveUserFullNameSF(String username) async {
     SharedPreferences sf = await SharedPreferences.getInstance();
-    return await sf.setBool(usernameKey, username);
+    print(sf.get(usernameKey));
+    return await sf.setString(usernameKey, username);
   }
 
-  static Future<bool> saveUserEmailSF(bool userEmail) async {
+  static Future<bool> saveUserEmailSF(String userEmail) async {
     SharedPreferences sf = await SharedPreferences.getInstance();
-    return await sf.setBool(userEmailKey, userEmail);
+    print(sf.get(userEmailKey));
+    return await sf.setString(userEmailKey, userEmail);
   }
 
   // * getting the data from SF
@@ -28,5 +31,15 @@ class HelperFunctions {
   static Future<bool?> getUserLoggedInStatus() async {
     SharedPreferences sf = await SharedPreferences.getInstance();
     return sf.getBool(userLoggedInKey);
+  }
+
+  static Future<String?> getUserEmail() async {
+    SharedPreferences sf = await SharedPreferences.getInstance();
+    return sf.getString(userEmailKey);
+  }
+
+  static Future<String?> getUserName() async {
+    SharedPreferences sf = await SharedPreferences.getInstance();
+    return sf.getString(usernameKey);
   }
 }

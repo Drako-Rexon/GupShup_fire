@@ -13,7 +13,7 @@ const textInputDecoration = InputDecoration(
   ),
 );
 
-void nextPage(context, page) {
+void nextPage(BuildContext context, page) {
   Navigator.push(context, MaterialPageRoute(builder: (_) => page));
 }
 
@@ -21,15 +21,15 @@ void nextPageReplace(context, page) {
   Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => page));
 }
 
-void showSnackbar(context, color, message) {
+void showSnackbar(context, color, String message) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(
         message,
-        style: TextStyle(fontSize: 14),
+        style: const TextStyle(fontSize: 14),
       ),
       backgroundColor: color,
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
       action: SnackBarAction(
         label: "OK",
         onPressed: () {},

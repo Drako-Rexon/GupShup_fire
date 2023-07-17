@@ -42,9 +42,11 @@ class _MainAppState extends State<MainApp> {
   }
 
   getUserLoggedInStatus() async {
-    await HelperFunctions.getUserLoggedInStatus()?.then((value) {
+    await HelperFunctions.getUserLoggedInStatus().then((value) {
       if (value != null) {
-        _isSignedIn = true;
+        setState(() {
+          _isSignedIn = value;
+        });
       }
     });
   }

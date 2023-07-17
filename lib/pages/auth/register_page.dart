@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gupshup_firebase/helper/helper_function.dart';
 import 'package:gupshup_firebase/pages/auth/login_page.dart';
+import 'package:gupshup_firebase/pages/homepage.dart';
 import 'package:gupshup_firebase/service/auth_service.dart';
 import 'package:gupshup_firebase/shared/constants.dart';
 import 'package:gupshup_firebase/widgets/widgets.dart';
@@ -194,9 +195,12 @@ class _RegisterPageState extends State<RegisterPage> {
           .registerUserWithEmailandPassword(fullName, email, password)
           .then((value) async {
         if (value == true) {
-          // * saving th eshared preferences
+          // * saving the shared preferences
 
-          // await HelperFunctions.saveUserLoggedInStatus(true);
+          await HelperFunctions.saveUserLoggedInStatus(true);
+          await HelperFunctions.saveUserEmailSF(email);
+          await HelperFunctions.saveUserFullNameSF(fullName);
+          nextPage(context, HomePage());
         } else {
           showSnackbar(context, Colors.red, value);
           setState(() {
