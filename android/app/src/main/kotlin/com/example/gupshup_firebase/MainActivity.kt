@@ -1,4 +1,4 @@
-package com.example.gupshup_firebase
+package com.example.gupshup_chat
 
 import io.flutter.embedding.android.FlutterActivity
 

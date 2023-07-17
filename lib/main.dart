@@ -1,20 +1,59 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:gupshup_firebase/helper/helper_function.dart';
+import 'package:gupshup_firebase/pages/homepage.dart';
+import 'package:gupshup_firebase/shared/constants.dart';
 
-void main() {
+import 'pages/auth/login_page.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+      options: FirebaseOptions(
+        apiKey: Constants.apiKey,
+        appId: Constants.apiId,
+        messagingSenderId: Constants.messagingSenderId,
+        projectId: Constants.projectsId,
+      ),
+    );
+  } else {
+    await Firebase.initializeApp();
+  }
+
   runApp(const MainApp());
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
 
   @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  bool _isSignedIn = false;
+  @override
+  void initState() {
+    super.initState();
+    getUserLoggedInStatus();
+  }
+
+  getUserLoggedInStatus() async {
+    await HelperFunctions.getUserLoggedInStatus()?.then((value) {
+      if (value != null) {
+        _isSignedIn = true;
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: _isSignedIn ? HomePage() : LoginPage(),
     );
   }
 }
