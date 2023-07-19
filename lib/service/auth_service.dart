@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gupshup_firebase/helper/helper_function.dart';
 import 'package:gupshup_firebase/service/database_service.dart';
