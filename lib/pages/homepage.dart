@@ -308,15 +308,9 @@ class _HomePageState extends State<HomePage> {
                 },
               );
             }
-          } else {
-            return noGroupWidget();
           }
         }
-        return Center(
-          child: CircularProgressIndicator(
-            color: Theme.of(context).primaryColor,
-          ),
-        );
+        return noGroupWidget();
       },
     );
   }
