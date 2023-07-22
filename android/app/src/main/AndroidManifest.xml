@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.gupshup_chat">
     <application
-        android:label="gupshup_firebase"
+        android:label="GupShup"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
