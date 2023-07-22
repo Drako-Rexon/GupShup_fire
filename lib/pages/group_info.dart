@@ -105,9 +105,24 @@ class _GroupInfoState extends State<GroupInfo> {
           children: [
             Container(
               padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
+              decoration: ShapeDecoration(
+                color: Theme.of(context).backgroundColor,
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    width: 0.50,
+                    color: Colors.black.withOpacity(0.2),
+                  ),
                   borderRadius: BorderRadius.circular(30),
-                  color: Theme.of(context).primaryColor.withOpacity(0.2)),
+                ),
+                shadows: const [
+                  BoxShadow(
+                    color: Color(0x3F000000),
+                    blurRadius: 10,
+                    offset: Offset(5, 4),
+                    spreadRadius: 0,
+                  )
+                ],
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -125,6 +140,7 @@ class _GroupInfoState extends State<GroupInfo> {
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Group: ${widget.groupName}",
@@ -139,6 +155,7 @@ class _GroupInfoState extends State<GroupInfo> {
                 ],
               ),
             ),
+            const SizedBox(height: 10),
             memberList(),
           ],
         ),
@@ -158,24 +175,60 @@ class _GroupInfoState extends State<GroupInfo> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Theme.of(context).primaryColor,
-                        child: Text(
-                          getName(snapshot.data['members'][index])
-                              .substring(0, 1)
-                              .toUpperCase(),
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold),
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.all(20),
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          width: 0.50,
+                          color: Colors.black.withOpacity(0.2),
                         ),
+                        borderRadius: BorderRadius.circular(30),
                       ),
-                      title: Text(getName(snapshot.data['members'][index])),
-                      subtitle: Text(getId(snapshot.data['members'][index])),
+                      shadows: const [
+                        BoxShadow(
+                          color: Color(0x3F000000),
+                          blurRadius: 10,
+                          offset: Offset(5, 4),
+                          spreadRadius: 0,
+                        )
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Theme.of(context).primaryColor,
+                          child: Text(
+                            getName(snapshot.data['members'][index])
+                                .substring(0, 1)
+                                .toUpperCase(),
+                            style: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              getName(snapshot.data['members'][index]),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w500),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(getId(snapshot.data['members'][index])),
+                          ],
+                        )
+                      ],
                     ),
                   );
                 },

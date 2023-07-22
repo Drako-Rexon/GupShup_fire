@@ -187,10 +187,22 @@ class _HomePageState extends State<HomePage> {
         },
         elevation: 0,
         backgroundColor: Theme.of(context).primaryColor,
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
-          size: 30,
+        child: Container(
+          width: 60,
+          height: 60,
+          decoration: const ShapeDecoration(
+            gradient: LinearGradient(
+              begin: Alignment(1.00, -0.08),
+              end: Alignment(-1, 0.08),
+              colors: [Color(0xFF019166), Color(0xFF0ADD9D)],
+            ),
+            shape: OvalBorder(),
+          ),
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+            size: 30,
+          ),
         ),
       ),
     );

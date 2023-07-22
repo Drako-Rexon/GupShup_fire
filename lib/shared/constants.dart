@@ -7,4 +7,5 @@ class Constants {
   static String projectsId = "gupshup-chat-fire";
 
   final primaryColor = const Color(0xFFee7b64);
+  final lightPrimaryColor = const Color.fromARGB(255, 255, 201, 190);
 }
