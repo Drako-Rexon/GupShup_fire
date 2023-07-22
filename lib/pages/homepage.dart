@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               nextPage(context, const SearchPage());
             },
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
           ),
         ],
         backgroundColor: Theme.of(context).primaryColor,
@@ -142,13 +142,13 @@ class _HomePageState extends State<HomePage> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        content: Text("Are you sure you want to logout"),
+                        content: const Text("Are you sure you want to logout"),
                         actions: [
                           IconButton(
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.cancel_outlined,
                               color: Colors.red,
                             ),
@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                                 nextPageReplace(context, const LoginPage());
                               });
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.done,
                               color: Colors.green,
                             ),
@@ -204,7 +204,7 @@ class _HomePageState extends State<HomePage> {
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
-              title: Text(
+              title: const Text(
                 "Create a group",
                 textAlign: TextAlign.left,
               ),
@@ -254,7 +254,7 @@ class _HomePageState extends State<HomePage> {
                   },
                   style: ElevatedButton.styleFrom(
                       primary: Theme.of(context).primaryColor),
-                  child: Text("CANCEL"),
+                  child: const Text("CANCEL"),
                 ),
                 ElevatedButton(
                   onPressed: () async {
@@ -278,7 +278,7 @@ class _HomePageState extends State<HomePage> {
                   },
                   style: ElevatedButton.styleFrom(
                       primary: Theme.of(context).primaryColor),
-                  child: Text("CREATE"),
+                  child: const Text("CREATE"),
                 ),
               ],
             );

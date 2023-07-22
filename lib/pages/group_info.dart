@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gupshup_firebase/pages/homepage.dart';
 import 'package:gupshup_firebase/service/database_service.dart';
+import 'package:gupshup_firebase/widgets/widgets.dart';
 
 class GroupInfo extends StatefulWidget {
   final String groupId;
@@ -74,16 +76,16 @@ class _GroupInfoState extends State<GroupInfo> {
                           ),
                           IconButton(
                             onPressed: () async {
-                              // DatabaseService(
-                              //         uid: FirebaseAuth
-                              //             .instance.currentUser!.uid)
-                              //     .toggleGroupJoin(
-                              //         widget.groupId,
-                              //         getName(widget.adminName),
-                              //         widget.groupName)
-                              //     .whenComplete(() {
-                              //   nextPageReplace(context, const HomePage());
-                              // });
+                              DatabaseService(
+                                      uId: FirebaseAuth
+                                          .instance.currentUser!.uid)
+                                  .toggleGroup(
+                                      widget.groupId,
+                                      getName(widget.adminName),
+                                      widget.groupName)
+                                  .whenComplete(() {
+                                nextPageReplace(context, const HomePage());
+                              });
                             },
                             icon: const Icon(
                               Icons.done,

@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "Groupie",
                       style: TextStyle(
                         fontSize: 40,
@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    Text(
+                    const Text(
                       "Login now to see what they are talking!",
                       style: TextStyle(
                         fontSize: 15,
@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     isKeyboard
                         ? Image.asset('assets/images/login.png')
-                        : SizedBox(height: 50),
+                        : const SizedBox(height: 50),
                     TextFormField(
                       cursorColor: Constants().primaryColor,
                       onChanged: (val) {
@@ -111,14 +111,14 @@ class _LoginPageState extends State<LoginPage> {
                         }
                       },
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           primary: Theme.of(context).primaryColor,
                           elevation: 0,
-                          shape: RoundedRectangleBorder(
+                          shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(30),
                             ),
@@ -127,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () {
                           login();
                         },
-                        child: Text(
+                        child: const Text(
                           "Sign in",
                           style: TextStyle(
                             color: Colors.white,
@@ -136,18 +136,18 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text.rich(
                       TextSpan(
                         text: "Don't have an account? ",
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 14,
                         ),
                         children: <TextSpan>[
                           TextSpan(
                               text: "Register now",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.black,
                                 decoration: TextDecoration.underline,
                               ),
@@ -189,7 +189,7 @@ class _LoginPageState extends State<LoginPage> {
           await HelperFunctions.saveUserFullNameSF(
               snapshot.docs[0]['fullName']);
 
-          nextPageReplace(context, HomePage());
+          nextPageReplace(context, const HomePage());
         } else {
           showSnackbar(context, Colors.red, value);
           setState(() {

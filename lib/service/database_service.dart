@@ -50,7 +50,7 @@ class DatabaseService {
       "groupId": groupDocumentReference.id,
     });
 
-    DocumentReference userDocumentReference = await userCollection.doc(uId);
+    DocumentReference userDocumentReference = userCollection.doc(uId);
     return await userDocumentReference.update({
       "groups":
           FieldValue.arrayUnion(["${groupDocumentReference.id}_$groupName"])
@@ -68,8 +68,8 @@ class DatabaseService {
 
   Future getGroupAdmin(String groupId) async {
     DocumentReference d = groupCollection.doc(groupId);
-    DocumentSnapshot documentSnapshot = await d.get();
-    return documentSnapshot["admin"];
+    DocumentSnapshot dcmntSnapshot = await d.get();
+    return dcmntSnapshot["admin"];
   }
 
   // * get group members
@@ -86,9 +86,9 @@ class DatabaseService {
   Future<bool> isUserJoined(
       String groupName, String groupId, String userName) async {
     DocumentReference userDocumentReference = userCollection.doc(uId);
-    DocumentSnapshot documentSnapshot = await userDocumentReference.get();
+    DocumentSnapshot dcmntSnapshot = await userDocumentReference.get();
 
-    List<dynamic> groups = await documentSnapshot["groups"];
+    List<dynamic> groups = await dcmntSnapshot["groups"];
     if (groups.contains("${groupId}_$groupName")) {
       return true;
     } else {
@@ -101,8 +101,8 @@ class DatabaseService {
     DocumentReference userDocumentReference = userCollection.doc(uId);
     DocumentReference groupDocumentReference = groupCollection.doc(groupId);
 
-    DocumentSnapshot documentSnapshot = await userDocumentReference.get();
-    List<dynamic> groups = await documentSnapshot["groups"];
+    DocumentSnapshot dcmntSnapshot = await userDocumentReference.get();
+    List<dynamic> groups = await dcmntSnapshot["groups"];
 
     // if user has our group -> remoce
     if (groups.contains("${groupId}_$groupName")) {

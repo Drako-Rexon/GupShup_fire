@@ -7,8 +7,8 @@ import 'auth/login_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key, required this.userName, required this.email});
-  final userName;
-  final email;
+  final String userName;
+  final String email;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -56,7 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 Text(
                   widget.userName,
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
               ],
             ),
@@ -70,7 +70,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 Text(
                   widget.email,
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
               ],
             ),
@@ -128,13 +128,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        content: Text("Are you sure you want to logout"),
+                        content: const Text("Are you sure you want to logout"),
                         actions: [
                           IconButton(
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.cancel_outlined,
                               color: Colors.red,
                             ),
@@ -146,7 +146,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 nextPageReplace(context, const LoginPage());
                               });
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.done,
                               color: Colors.green,
                             ),

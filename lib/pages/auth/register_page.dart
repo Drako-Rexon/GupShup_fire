@@ -41,7 +41,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "Goupie",
                       style: TextStyle(
                         fontSize: 40,
@@ -49,7 +49,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    Text(
+                    const Text(
                       "Create your account now to chat and explore",
                       style: TextStyle(
                         fontSize: 15,
@@ -58,7 +58,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     isKeyboard
                         ? Image.asset('assets/images/register.png')
-                        : SizedBox(height: 50),
+                        : const SizedBox(height: 50),
                     // Image.asset('assets/images/register.png'),
                     TextFormField(
                       cursorColor: Constants().primaryColor,
@@ -82,7 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         }
                       },
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     TextFormField(
                       cursorColor: Constants().primaryColor,
                       onChanged: (val) {
@@ -129,14 +129,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         }
                       },
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           primary: Theme.of(context).primaryColor,
                           elevation: 0,
-                          shape: RoundedRectangleBorder(
+                          shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(30),
                             ),
@@ -145,7 +145,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         onPressed: () {
                           register();
                         },
-                        child: Text(
+                        child: const Text(
                           "Sign up",
                           style: TextStyle(
                             color: Colors.white,
@@ -154,18 +154,18 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text.rich(
                       TextSpan(
                         text: "Already have an account? ",
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 14,
                         ),
                         children: <TextSpan>[
                           TextSpan(
                               text: "Login now",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.black,
                                 decoration: TextDecoration.underline,
                               ),
@@ -200,7 +200,7 @@ class _RegisterPageState extends State<RegisterPage> {
           await HelperFunctions.saveUserLoggedInStatus(true);
           await HelperFunctions.saveUserEmailSF(email);
           await HelperFunctions.saveUserFullNameSF(fullName);
-          nextPage(context, HomePage());
+          nextPage(context, const HomePage());
         } else {
           showSnackbar(context, Colors.red, value);
           setState(() {
