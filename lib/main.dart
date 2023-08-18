@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gupshup_firebase/helper/helper_function.dart';
 import 'package:gupshup_firebase/pages/homepage.dart';
 import 'package:gupshup_firebase/shared/constants.dart';
@@ -53,6 +54,8 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return MaterialApp(
       theme: ThemeData(
         primaryColor: Constants().primaryColor,

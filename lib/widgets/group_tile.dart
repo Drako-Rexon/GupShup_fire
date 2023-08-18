@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gupshup_firebase/pages/chat_page.dart';
+import 'package:gupshup_firebase/shared/constants.dart';
 import 'package:gupshup_firebase/widgets/widgets.dart';
 
 class GroupTile extends StatefulWidget {
@@ -23,19 +24,20 @@ class _GroupTileState extends State<GroupTile> {
     return GestureDetector(
       onTap: () {
         nextPage(
-            context,
-            ChatPage(
-              groupId: widget.groupId,
-              groupName: widget.groupName,
-              userName: widget.userName,
-            ));
+          context,
+          ChatPage(
+            groupId: widget.groupId,
+            groupName: widget.groupName,
+            userName: widget.userName,
+          ),
+        );
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
         child: ListTile(
           leading: CircleAvatar(
             radius: 30,
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: Constants().darkGrey,
             child: Text(
               widget.groupName.substring(0, 1).toUpperCase(),
               textAlign: TextAlign.center,
@@ -45,7 +47,8 @@ class _GroupTileState extends State<GroupTile> {
           ),
           title: Text(
             widget.groupName,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: Constants().darkGrey),
           ),
           subtitle: Text(
             "Join the conversation as ${widget.userName}",

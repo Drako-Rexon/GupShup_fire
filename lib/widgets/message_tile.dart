@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gupshup_firebase/shared/constants.dart';
 
 class MessageTile extends StatefulWidget {
   final String message;
@@ -33,56 +34,28 @@ class _MessageTileState extends State<MessageTile> {
         padding:
             const EdgeInsets.only(top: 17, bottom: 17, left: 20, right: 20),
         decoration: widget.sentByMe
-            ? const ShapeDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment(1.00, 0.00),
-                  end: Alignment(-1, 0),
-                  colors: [Color(0xFF008052), Color(0xFF0ADD9D)],
+            // ? sent by the user
+            ? ShapeDecoration(
+                color: Constants().darkGrey,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
+                  ),
                 ),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                  bottomLeft: Radius.circular(20),
-                )),
-                shadows: [
-                  BoxShadow(
-                    color: Color(0x3F000000),
-                    blurRadius: 4,
-                    offset: Offset(0, 4),
-                    spreadRadius: 0,
-                  )
-                ],
               )
-            : ShapeDecoration(
+            // ? received msg ui
+            : const ShapeDecoration(
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                shadows: const [
-                  BoxShadow(
-                    color: Color(0x3F000000),
-                    blurRadius: 4,
-                    offset: Offset(0, 4),
-                    spreadRadius: 0,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
                   ),
-                ],
+                ),
               ),
-        //  BoxDecoration(
-        //     borderRadius: widget.sentByMe
-        //         ? const BorderRadius.only(
-        //             topLeft: Radius.circular(20),
-        //             topRight: Radius.circular(20),
-        //             bottomLeft: Radius.circular(20),
-        //           )
-        //         : const BorderRadius.only(
-        //             topLeft: Radius.circular(20),
-        //             topRight: Radius.circular(20),
-        //             bottomRight: Radius.circular(20),
-        //           ),
-        //     color: widget.sentByMe
-        //         ? Theme.of(context).primaryColor
-        //         : Colors.grey[700]),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -31,12 +31,11 @@ class _LoginPageState extends State<LoginPage> {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).primaryColor,
         body: Visibility(
           visible: !_isLoading,
           replacement: Center(
-            child: CircularProgressIndicator(
-                color: Theme.of(context).primaryColor),
+            child: CircularProgressIndicator(color: Constants().darkGrey),
           ),
           child: SingleChildScrollView(
             child: Padding(
@@ -47,18 +46,20 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       "Groupie",
                       style: TextStyle(
                         fontSize: 40,
+                        color: Constants().darkGrey,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 10),
-                    const Text(
+                    Text(
                       "Login now to see what they are talking!",
                       style: TextStyle(
                         fontSize: 15,
+                        color: Constants().darkGrey,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -66,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                         ? Image.asset('assets/images/login.png')
                         : const SizedBox(height: 50),
                     TextFormField(
-                      cursorColor: Constants().primaryColor,
+                      cursorColor: Constants().secondaryColor,
                       onChanged: (val) {
                         setState(() {
                           email = val;
@@ -74,9 +75,21 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       decoration: textInputDecoration.copyWith(
                         labelText: "Email",
+                        errorBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        focusedErrorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        border: InputBorder.none,
+                        fillColor: Colors.white,
+                        filled: true,
+                        hintText: 'Enter Email',
+                        hintStyle: TextStyle(color: Constants().secondaryColor),
+                        labelStyle:
+                            TextStyle(color: Constants().secondaryColor),
                         prefixIcon: Icon(
                           Icons.mail,
-                          color: Theme.of(context).primaryColor,
+                          color: Constants().secondaryColor,
                         ),
                       ),
                       validator: (val) {
@@ -97,10 +110,22 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       obscureText: true,
                       decoration: textInputDecoration.copyWith(
+                        errorBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        focusedErrorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        border: InputBorder.none,
+                        fillColor: Colors.white,
+                        filled: true,
+                        hintText: 'Enter Password',
+                        hintStyle: TextStyle(color: Constants().secondaryColor),
                         labelText: "Password",
+                        labelStyle:
+                            TextStyle(color: Constants().secondaryColor),
                         prefixIcon: Icon(
-                          Icons.mail,
-                          color: Theme.of(context).primaryColor,
+                          Icons.lock,
+                          color: Constants().secondaryColor,
                         ),
                       ),
                       validator: (value) {
@@ -115,24 +140,14 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Theme.of(context).primaryColor,
-                          elevation: 0,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(30),
-                            ),
-                          ),
-                        ),
+                        style: ButtonStyle(
+                            elevation: MaterialStateProperty.all(0)),
                         onPressed: () {
                           login();
                         },
                         child: const Text(
                           "Sign in",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
+                          style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                       ),
                     ),
@@ -140,15 +155,15 @@ class _LoginPageState extends State<LoginPage> {
                     Text.rich(
                       TextSpan(
                         text: "Don't have an account? ",
-                        style: const TextStyle(
-                          color: Colors.black,
+                        style: TextStyle(
+                          color: Constants().darkGrey,
                           fontSize: 14,
                         ),
                         children: <TextSpan>[
                           TextSpan(
                               text: "Register now",
-                              style: const TextStyle(
-                                color: Colors.black,
+                              style: TextStyle(
+                                color: Constants().darkGrey,
                                 decoration: TextDecoration.underline,
                               ),
                               recognizer: TapGestureRecognizer()
@@ -200,3 +215,5 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 }
+
+class GoogleFonts {}

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gupshup_firebase/pages/homepage.dart';
 import 'package:gupshup_firebase/service/auth_service.dart';
+import 'package:gupshup_firebase/shared/constants.dart';
 import 'package:gupshup_firebase/widgets/widgets.dart';
 
 import 'auth/login_page.dart';
@@ -21,7 +22,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Constants().darkGrey,
         elevation: 0,
         centerTitle: true,
         title: const Text(
@@ -33,6 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
+      backgroundColor: Constants().primaryColor,
       body: Container(
         padding: const EdgeInsets.symmetric(
           horizontal: 40,
@@ -44,19 +46,25 @@ class _ProfilePageState extends State<ProfilePage> {
             Icon(
               Icons.account_circle,
               size: 200,
-              color: Colors.grey[700],
+              color: Constants().darkGrey,
             ),
             const SizedBox(height: 15),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   "Full Name",
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Constants().darkGrey,
+                  ),
                 ),
                 Text(
                   widget.userName,
-                  style: const TextStyle(fontSize: 18),
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Constants().darkGrey,
+                  ),
                 ),
               ],
             ),
@@ -64,13 +72,19 @@ class _ProfilePageState extends State<ProfilePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   "Email",
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Constants().darkGrey,
+                  ),
                 ),
                 Text(
                   widget.email,
-                  style: const TextStyle(fontSize: 18),
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Constants().darkGrey,
+                  ),
                 ),
               ],
             ),

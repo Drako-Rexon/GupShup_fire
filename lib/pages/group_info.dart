@@ -1,19 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gupshup_firebase/pages/auth/login_page.dart';
 import 'package:gupshup_firebase/pages/homepage.dart';
 import 'package:gupshup_firebase/service/database_service.dart';
+import 'package:gupshup_firebase/shared/constants.dart';
 import 'package:gupshup_firebase/widgets/widgets.dart';
 
 class GroupInfo extends StatefulWidget {
   final String groupId;
   final String groupName;
   final String adminName;
-  const GroupInfo(
-      {Key? key,
-      required this.adminName,
-      required this.groupName,
-      required this.groupId})
-      : super(key: key);
+  const GroupInfo({
+    Key? key,
+    required this.adminName,
+    required this.groupName,
+    required this.groupId,
+  }) : super(key: key);
 
   @override
   State<GroupInfo> createState() => _GroupInfoState();
@@ -48,55 +50,53 @@ class _GroupInfoState extends State<GroupInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Constants().primaryColor,
       appBar: AppBar(
+        backgroundColor: Constants().darkGrey,
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Theme.of(context).primaryColor,
         title: const Text("Group Info"),
         actions: [
           IconButton(
               onPressed: () {
                 showDialog(
-                    barrierDismissible: false,
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: const Text("Exit"),
-                        content:
-                            const Text("Are you sure you exit the group? "),
-                        actions: [
-                          IconButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            icon: const Icon(
-                              Icons.cancel,
-                              color: Colors.red,
-                            ),
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text("Exit"),
+                      content: const Text("Are you sure you exit the group? "),
+                      actions: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: const Icon(
+                            Icons.cancel,
+                            color: Colors.red,
                           ),
-                          IconButton(
-                            onPressed: () async {
-                              DatabaseService(
-                                      uId: FirebaseAuth
-                                          .instance.currentUser!.uid)
-                                  .toggleGroup(
-                                      widget.groupId,
-                                      getName(widget.adminName),
-                                      widget.groupName)
-                                  .whenComplete(() {
-                                nextPageReplace(context, const HomePage());
-                              });
-                            },
-                            icon: const Icon(
-                              Icons.done,
-                              color: Colors.green,
-                            ),
+                        ),
+                        IconButton(
+                          onPressed: () async {
+                            DatabaseService(
+                                    uId: FirebaseAuth.instance.currentUser!.uid)
+                                .toggleGroup(widget.groupId,
+                                    getName(widget.adminName), widget.groupName)
+                                .whenComplete(() {
+                              nextPageReplace(context, const HomePage());
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.done,
+                            color: Colors.green,
                           ),
-                        ],
-                      );
-                    });
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
-              icon: const Icon(Icons.exit_to_app))
+              icon: const Icon(Icons.exit_to_app)),
         ],
       ),
       body: Container(
@@ -106,7 +106,7 @@ class _GroupInfoState extends State<GroupInfo> {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: ShapeDecoration(
-                color: Theme.of(context).backgroundColor,
+                color: Constants().secondaryColor, //.withOpacity(0.5),
                 shape: RoundedRectangleBorder(
                   side: BorderSide(
                     width: 0.50,
@@ -114,42 +114,30 @@ class _GroupInfoState extends State<GroupInfo> {
                   ),
                   borderRadius: BorderRadius.circular(30),
                 ),
-                shadows: const [
-                  BoxShadow(
-                    color: Color(0x3F000000),
-                    blurRadius: 10,
-                    offset: Offset(5, 4),
-                    spreadRadius: 0,
-                  )
-                ],
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   CircleAvatar(
                     radius: 30,
-                    backgroundColor: Theme.of(context).primaryColor,
+                    backgroundColor: Constants().darkGrey,
                     child: Text(
                       widget.groupName.substring(0, 1).toUpperCase(),
                       style: const TextStyle(
                           fontWeight: FontWeight.w500, color: Colors.white),
                     ),
                   ),
-                  const SizedBox(
-                    width: 20,
-                  ),
+                  const SizedBox(width: 20),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Group: ${widget.groupName}",
-                        style: const TextStyle(fontWeight: FontWeight.w500),
+                        // style: , // const TextStyle(fontWeight: FontWeight.w500),
                       ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text("Admin: ${getName(widget.adminName)}")
+                      const SizedBox(height: 5),
+                      Text("Admin: ${getName(widget.adminName)}"),
                     ],
                   )
                 ],
@@ -186,21 +174,13 @@ class _GroupInfoState extends State<GroupInfo> {
                         ),
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      shadows: const [
-                        BoxShadow(
-                          color: Color(0x3F000000),
-                          blurRadius: 10,
-                          offset: Offset(5, 4),
-                          spreadRadius: 0,
-                        )
-                      ],
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         CircleAvatar(
                           radius: 30,
-                          backgroundColor: Theme.of(context).primaryColor,
+                          backgroundColor: Constants().darkGrey,
                           child: Text(
                             getName(snapshot.data['members'][index])
                                 .substring(0, 1)

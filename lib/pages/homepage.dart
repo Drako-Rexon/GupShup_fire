@@ -5,6 +5,7 @@ import 'package:gupshup_firebase/pages/auth/login_page.dart';
 import 'package:gupshup_firebase/pages/search_page.dart';
 import 'package:gupshup_firebase/service/auth_service.dart';
 import 'package:gupshup_firebase/service/database_service.dart';
+import 'package:gupshup_firebase/shared/constants.dart';
 import 'package:gupshup_firebase/widgets/group_tile.dart';
 import 'package:gupshup_firebase/widgets/widgets.dart';
 
@@ -71,10 +72,19 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               nextPage(context, const SearchPage());
             },
-            icon: const Icon(Icons.search),
+            icon: Container(
+              padding: const EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(12)),
+              child: Icon(
+                Icons.search,
+                color: Constants().darkGrey,
+              ),
+            ), // Constants().darkGrey),
           ),
         ],
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Constants().darkGrey,
+        elevation: 0,
         title: const Text(
           "Groups",
           style: TextStyle(
@@ -84,6 +94,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+      backgroundColor: Constants().primaryColor,
       body: groupList(),
       drawer: Drawer(
         child: ListView(
@@ -127,6 +138,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 );
               },
+              selectedTileColor: Constants().primaryColor,
               selectedColor: Theme.of(context).primaryColor,
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
@@ -190,18 +202,13 @@ class _HomePageState extends State<HomePage> {
         child: Container(
           width: 60,
           height: 60,
-          decoration: const ShapeDecoration(
-            gradient: LinearGradient(
-              begin: Alignment(1.00, -0.08),
-              end: Alignment(-1, 0.08),
-              colors: [Color(0xFF019166), Color(0xFF0ADD9D)],
-            ),
-            shape: OvalBorder(),
-          ),
-          child: const Icon(
-            Icons.add,
-            color: Colors.white,
-            size: 30,
+          padding: const EdgeInsets.all(12),
+          decoration: ShapeDecoration(
+              color: Constants().darkGrey, shape: const OvalBorder()),
+          child: Image.asset(
+            Constants.msgIcon,
+            width: 15,
+            height: 15,
           ),
         ),
       ),
@@ -216,9 +223,11 @@ class _HomePageState extends State<HomePage> {
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
-              title: const Text(
+              backgroundColor: Constants().primaryColor,
+              title: Text(
                 "Create a group",
                 textAlign: TextAlign.left,
+                style: TextStyle(color: Constants().darkGrey),
               ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -236,24 +245,19 @@ class _HomePageState extends State<HomePage> {
                           _groupName = val;
                         });
                       },
-                      style: const TextStyle(color: Colors.black),
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Theme.of(context).primaryColor),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(20)),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Theme.of(context).primaryColor),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(20)),
-                        ),
-                        errorBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red),
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                        ),
+                      style: TextStyle(color: Constants().darkGrey),
+                      cursorColor: Constants().darkGrey,
+                      decoration: textInputDecoration.copyWith(
+                        hintText: "Enter group name...",
+                        hintStyle: TextStyle(color: Constants().darkGrey),
+                        errorBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        focusedErrorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        border: InputBorder.none,
+                        fillColor: Colors.white,
+                        filled: true,
                       ),
                     ),
                   ),
@@ -265,7 +269,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
-                      primary: Theme.of(context).primaryColor),
+                      elevation: 0, primary: Constants().darkGrey),
                   child: const Text("CANCEL"),
                 ),
                 ElevatedButton(
@@ -289,7 +293,7 @@ class _HomePageState extends State<HomePage> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                      primary: Theme.of(context).primaryColor),
+                      elevation: 0, primary: Constants().darkGrey),
                   child: const Text("CREATE"),
                 ),
               ],
@@ -303,7 +307,6 @@ class _HomePageState extends State<HomePage> {
   groupList() {
     return StreamBuilder(
       stream: groups,
-      // initialData: initialData,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         // checks
         if (snapshot.hasData) {
@@ -338,14 +341,15 @@ class _HomePageState extends State<HomePage> {
             onTap: () {},
             child: Icon(
               Icons.circle,
-              color: Colors.grey[700],
+              color: Constants().darkGrey,
               size: 75,
             ),
           ),
           const SizedBox(height: 20),
-          const Text(
+          Text(
             "You've joined any groups, tap on the add icon to create a group or also search from top search",
             textAlign: TextAlign.center,
+            style: TextStyle(color: Constants().darkGrey),
           ),
         ],
       ),

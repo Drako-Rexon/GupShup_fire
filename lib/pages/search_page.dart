@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gupshup_firebase/helper/helper_function.dart';
 import 'package:gupshup_firebase/pages/chat_page.dart';
 import 'package:gupshup_firebase/service/database_service.dart';
+import 'package:gupshup_firebase/shared/constants.dart';
 import 'package:gupshup_firebase/widgets/widgets.dart';
 
 class SearchPage extends StatefulWidget {
@@ -50,17 +51,18 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Constants().darkGrey,
         title: const Text(
           "Search",
           style: TextStyle(
               fontSize: 27, fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
+      backgroundColor: Constants().primaryColor,
       body: Column(
         children: [
           Container(
-            color: Theme.of(context).primaryColor,
+            color: Constants().darkGrey,
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Row(
               children: [
@@ -71,13 +73,13 @@ class _SearchPageState extends State<SearchPage> {
                     controller: searchController,
                     style: const TextStyle(color: Colors.white),
                     decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "Search groups....",
-                        hintStyle:
-                            TextStyle(color: Colors.white, fontSize: 16)),
+                      border: InputBorder.none,
+                      hintText: "Search groups....",
+                      hintStyle: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
                   ),
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     initiateSearchMethod();
                   },
@@ -85,11 +87,11 @@ class _SearchPageState extends State<SearchPage> {
                     width: 40,
                     height: 40,
                     decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(40)),
-                    child: const Icon(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12)),
+                    child: Icon(
                       Icons.search,
-                      color: Colors.white,
+                      color: Constants().darkGrey,
                     ),
                   ),
                 )
@@ -161,7 +163,7 @@ class _SearchPageState extends State<SearchPage> {
       contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       leading: CircleAvatar(
         radius: 30,
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Constants().darkGrey,
         child: Text(
           groupName.substring(0, 1).toUpperCase(),
           style: const TextStyle(color: Colors.white),
@@ -198,7 +200,7 @@ class _SearchPageState extends State<SearchPage> {
             ? Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.white, //Theme.of(context).primaryColor,
+                  color: Constants().darkGrey,
                   border: Border.all(color: Colors.white, width: 1),
                 ),
                 padding:
@@ -212,7 +214,7 @@ class _SearchPageState extends State<SearchPage> {
             : Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Theme.of(context).primaryColor,
+                  color: Constants().darkGrey,
                 ),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
