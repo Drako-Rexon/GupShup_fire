@@ -27,6 +27,7 @@ class _RegisterPageState extends State<RegisterPage> {
     bool isKeyboard = MediaQuery.of(context).viewInsets.bottom == 0;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Constants().primaryColor,
         body: Visibility(
           visible: !_isLoading,
           replacement: Center(
@@ -42,7 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const Text(
-                      "Goupie",
+                      "Gupshup",
                       style: TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.bold,
@@ -59,20 +60,30 @@ class _RegisterPageState extends State<RegisterPage> {
                     isKeyboard
                         ? Image.asset('assets/images/register.png')
                         : const SizedBox(height: 50),
-                    // Image.asset('assets/images/register.png'),
                     TextFormField(
-                      cursorColor: Constants().primaryColor,
+                      cursorColor: Constants().darkGrey,
                       onChanged: (val) {
                         setState(() {
                           fullName = val;
                         });
                       },
+                      style: TextStyle(color: Constants().darkGrey),
                       decoration: textInputDecoration.copyWith(
                         labelText: "Full Name",
-                        prefixIcon: Icon(
-                          Icons.person,
-                          color: Theme.of(context).primaryColor,
-                        ),
+                        errorBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        focusedErrorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        border: InputBorder.none,
+                        fillColor: Colors.white,
+                        filled: true,
+                        hintText: 'Enter Email',
+                        hintStyle: TextStyle(color: Constants().secondaryColor),
+                        labelStyle:
+                            TextStyle(color: Constants().secondaryColor),
+                        prefixIcon: Icon(Icons.person,
+                            color: Constants().secondaryColor),
                       ),
                       validator: (val) {
                         if (val!.isNotEmpty) {
@@ -84,7 +95,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
-                      cursorColor: Constants().primaryColor,
+                      cursorColor: Constants().darkGrey,
                       onChanged: (val) {
                         setState(() {
                           email = val;
@@ -92,10 +103,20 @@ class _RegisterPageState extends State<RegisterPage> {
                       },
                       decoration: textInputDecoration.copyWith(
                         labelText: "Email",
-                        prefixIcon: Icon(
-                          Icons.mail,
-                          color: Theme.of(context).primaryColor,
-                        ),
+                        errorBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        focusedErrorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        border: InputBorder.none,
+                        fillColor: Colors.white,
+                        filled: true,
+                        hintText: 'Enter Email',
+                        hintStyle: TextStyle(color: Constants().secondaryColor),
+                        labelStyle:
+                            TextStyle(color: Constants().secondaryColor),
+                        prefixIcon:
+                            Icon(Icons.mail, color: Constants().secondaryColor),
                       ),
                       validator: (val) {
                         return RegExp(
@@ -107,7 +128,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
-                      cursorColor: Constants().primaryColor,
+                      cursorColor: Constants().darkGrey,
                       onChanged: (val) {
                         setState(() {
                           password = val;
@@ -116,10 +137,20 @@ class _RegisterPageState extends State<RegisterPage> {
                       obscureText: true,
                       decoration: textInputDecoration.copyWith(
                         labelText: "Password",
-                        prefixIcon: Icon(
-                          Icons.mail,
-                          color: Theme.of(context).primaryColor,
-                        ),
+                        errorBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        focusedErrorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        border: InputBorder.none,
+                        fillColor: Colors.white,
+                        filled: true,
+                        hintText: 'Enter Email',
+                        hintStyle: TextStyle(color: Constants().secondaryColor),
+                        labelStyle:
+                            TextStyle(color: Constants().secondaryColor),
+                        prefixIcon:
+                            Icon(Icons.lock, color: Constants().secondaryColor),
                       ),
                       validator: (value) {
                         if (value!.length < 6) {
@@ -133,24 +164,17 @@ class _RegisterPageState extends State<RegisterPage> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Theme.of(context).primaryColor,
-                          elevation: 0,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(30),
-                            ),
-                          ),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Constants().primaryBlue),
+                          elevation: MaterialStateProperty.all(0),
                         ),
                         onPressed: () {
                           register();
                         },
                         child: const Text(
                           "Sign up",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
+                          style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                       ),
                     ),

@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      "Groupie",
+                      "Gupshup",
                       style: TextStyle(
                         fontSize: 40,
                         color: Constants().darkGrey,
@@ -67,7 +67,8 @@ class _LoginPageState extends State<LoginPage> {
                         ? Image.asset('assets/images/login.png')
                         : const SizedBox(height: 50),
                     TextFormField(
-                      cursorColor: Constants().secondaryColor,
+                      cursorColor: Constants().darkGrey,
+                      style: TextStyle(color: Constants().darkGrey),
                       onChanged: (val) {
                         setState(() {
                           email = val;
@@ -87,10 +88,8 @@ class _LoginPageState extends State<LoginPage> {
                         hintStyle: TextStyle(color: Constants().secondaryColor),
                         labelStyle:
                             TextStyle(color: Constants().secondaryColor),
-                        prefixIcon: Icon(
-                          Icons.mail,
-                          color: Constants().secondaryColor,
-                        ),
+                        prefixIcon:
+                            Icon(Icons.mail, color: Constants().secondaryColor),
                       ),
                       validator: (val) {
                         return RegExp(
@@ -102,6 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
+                      style: TextStyle(color: Constants().darkGrey),
                       cursorColor: Constants().primaryColor,
                       onChanged: (val) {
                         setState(() {
