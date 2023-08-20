@@ -21,6 +21,17 @@ class _RegisterPageState extends State<RegisterPage> {
   String password = "";
   String fullName = "";
   AuthService authService = AuthService();
+  final TextEditingController _mailController = TextEditingController();
+  final TextEditingController _pswdController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+
+  bool isEnable() {
+    return RegExp(
+                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            .hasMatch(_mailController.text) &&
+        _pswdController.text.length >= 6 &&
+        _nameController.text.isNotEmpty;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +79,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         });
                       },
                       style: TextStyle(color: Constants().darkGrey),
+                      controller: _nameController,
                       decoration: textInputDecoration.copyWith(
                         labelText: "Full Name",
                         errorBorder: InputBorder.none,
@@ -78,7 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         border: InputBorder.none,
                         fillColor: Colors.white,
                         filled: true,
-                        hintText: 'Enter Email',
+                        hintText: 'Enter Full Name',
                         hintStyle: TextStyle(color: Constants().secondaryColor),
                         labelStyle:
                             TextStyle(color: Constants().secondaryColor),
@@ -101,6 +113,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           email = val;
                         });
                       },
+                      controller: _mailController,
                       decoration: textInputDecoration.copyWith(
                         labelText: "Email",
                         errorBorder: InputBorder.none,
@@ -134,6 +147,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           password = val;
                         });
                       },
+                      controller: _pswdController,
                       obscureText: true,
                       decoration: textInputDecoration.copyWith(
                         labelText: "Password",
@@ -145,7 +159,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         border: InputBorder.none,
                         fillColor: Colors.white,
                         filled: true,
-                        hintText: 'Enter Email',
+                        hintText: 'Enter Password',
                         hintStyle: TextStyle(color: Constants().secondaryColor),
                         labelStyle:
                             TextStyle(color: Constants().secondaryColor),
@@ -165,12 +179,15 @@ class _RegisterPageState extends State<RegisterPage> {
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              Constants().primaryBlue),
+                          backgroundColor: isEnable()
+                              ? MaterialStateProperty.all(
+                                  Constants().primaryBlue)
+                              : MaterialStateProperty.all(
+                                  Constants().secondaryColor),
                           elevation: MaterialStateProperty.all(0),
                         ),
                         onPressed: () {
-                          register();
+                          isEnable() ? register() : () {};
                         },
                         child: const Text(
                           "Sign up",

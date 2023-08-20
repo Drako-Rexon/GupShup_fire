@@ -24,6 +24,15 @@ class _LoginPageState extends State<LoginPage> {
   String password = "";
   bool _isLoading = false;
   AuthService authService = AuthService();
+  final TextEditingController _mailController = TextEditingController();
+  final TextEditingController _pswdController = TextEditingController();
+
+  bool isEnable() {
+    return RegExp(
+                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            .hasMatch(_mailController.text) &&
+        _pswdController.text.length >= 6;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                           email = val;
                         });
                       },
+                      controller: _mailController,
                       decoration: textInputDecoration.copyWith(
                         labelText: "Email",
                         errorBorder: InputBorder.none,
@@ -103,6 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                     TextFormField(
                       style: TextStyle(color: Constants().darkGrey),
                       cursorColor: Constants().primaryColor,
+                      controller: _pswdController,
                       onChanged: (val) {
                         setState(() {
                           password = val;
@@ -141,9 +152,14 @@ class _LoginPageState extends State<LoginPage> {
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                            elevation: MaterialStateProperty.all(0)),
+                            elevation: MaterialStateProperty.all(0),
+                            backgroundColor: isEnable()
+                                ? MaterialStateProperty.all(
+                                    Constants().primaryBlue)
+                                : MaterialStateProperty.all(
+                                    Constants().secondaryColor)),
                         onPressed: () {
-                          login();
+                          isEnable() ? login() : () {};
                         },
                         child: const Text(
                           "Sign in",
