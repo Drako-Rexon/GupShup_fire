@@ -59,7 +59,7 @@ class _MainAppState extends State<MainApp> {
     return MaterialApp(
       theme: ThemeData(
         primaryColor: Constants().primaryColor,
-        backgroundColor: Constants().lightPrimaryColor,
+        // backgroundColor: Constants().lightPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,

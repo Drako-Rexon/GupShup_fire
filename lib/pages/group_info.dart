@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gupshup_firebase/pages/auth/login_page.dart';
 import 'package:gupshup_firebase/pages/homepage.dart';
 import 'package:gupshup_firebase/service/database_service.dart';
 import 'package:gupshup_firebase/shared/constants.dart';
@@ -226,8 +225,7 @@ class _GroupInfoState extends State<GroupInfo> {
         } else {
           return Center(
               child: CircularProgressIndicator(
-            color: Theme.of(context).primaryColor,
-          ));
+                  color: Theme.of(context).primaryColor));
         }
       },
     );

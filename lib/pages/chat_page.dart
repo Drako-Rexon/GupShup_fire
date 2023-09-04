@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gupshup_firebase/pages/group_info.dart';
+import 'package:gupshup_firebase/pages/homepage.dart';
 import 'package:gupshup_firebase/service/database_service.dart';
 import 'package:gupshup_firebase/shared/constants.dart';
 import 'package:gupshup_firebase/widgets/message_tile.dart';
@@ -25,6 +27,7 @@ class _ChatPageState extends State<ChatPage> {
   Stream<QuerySnapshot>? chats;
   TextEditingController messageController = TextEditingController();
   String admin = "";
+  List<String> items = ["Leave Group"];
 
   @override
   void initState() {
@@ -45,6 +48,10 @@ class _ChatPageState extends State<ChatPage> {
     });
   }
 
+  String getName(String r) {
+    return r.substring(r.indexOf("_") + 1);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,10 +60,8 @@ class _ChatPageState extends State<ChatPage> {
         backgroundColor: Constants().darkGrey,
         centerTitle: true,
         elevation: 0,
-        title: Text(widget.groupName),
-        actions: [
-          IconButton(
-            onPressed: () {
+        title: InkWell(
+            onTap: () {
               nextPage(
                 context,
                 GroupInfo(
@@ -66,8 +71,67 @@ class _ChatPageState extends State<ChatPage> {
                 ),
               );
             },
-            icon: const Icon(Icons.more_vert),
-          ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(widget.groupName),
+              ],
+            )),
+        actions: [
+          PopupMenuButton(itemBuilder: (context) {
+            return [
+              PopupMenuItem(
+                child: InkWell(
+                  onTap: () async {
+                    showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text("Exit"),
+                          content:
+                              const Text("Are you sure you exit the group? "),
+                          actions: [
+                            IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: const Icon(
+                                Icons.cancel,
+                                color: Colors.red,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () async {
+                                DatabaseService(
+                                        uId: FirebaseAuth
+                                            .instance.currentUser!.uid)
+                                    .toggleGroup(widget.groupId, getName(admin),
+                                        widget.groupName)
+                                    .whenComplete(() {
+                                  nextPageReplace(context, const HomePage());
+                                });
+                              },
+                              icon: const Icon(
+                                Icons.done,
+                                color: Colors.green,
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  child: const Row(
+                    children: [
+                      Icon(Icons.more_vert),
+                      Text("Leave Group"),
+                    ],
+                  ),
+                ),
+              )
+            ];
+          }),
         ],
         leading: IconButton(
           onPressed: () {

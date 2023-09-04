@@ -268,8 +268,10 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  style: ElevatedButton.styleFrom(
-                      elevation: 0, primary: Constants().darkGrey),
+                  style: ButtonStyle(
+                      elevation: MaterialStateProperty.all(0),
+                      backgroundColor:
+                          MaterialStateProperty.all(Constants().darkGrey)),
                   child: const Text("CANCEL"),
                 ),
                 ElevatedButton(
@@ -292,8 +294,11 @@ class _HomePageState extends State<HomePage> {
                           context, Colors.green, "Group created successfully.");
                     }
                   },
-                  style: ElevatedButton.styleFrom(
-                      elevation: 0, primary: Constants().darkGrey),
+                  style: ButtonStyle(
+                    elevation: MaterialStateProperty.all(0),
+                    backgroundColor:
+                        MaterialStateProperty.all(Constants().darkGrey),
+                  ),
                   child: const Text("CREATE"),
                 ),
               ],
