@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gupshup_firebase/helper/helper_function.dart';
 import 'package:gupshup_firebase/pages/homepage.dart';
 import 'package:gupshup_firebase/shared/constants.dart';
@@ -10,7 +11,7 @@ import 'pages/auth/login_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await dotenv.load(fileName: "assets/.env");
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: FirebaseOptions(
@@ -42,6 +43,12 @@ class _MainAppState extends State<MainApp> {
     getUserLoggedInStatus();
   }
 
+  splashEffect() {
+    Future.delayed(const Duration(seconds: 2)).then((val) {
+      getUserLoggedInStatus();
+    });
+  }
+
   getUserLoggedInStatus() async {
     await HelperFunctions.getUserLoggedInStatus().then((value) {
       if (value != null) {
@@ -59,11 +66,19 @@ class _MainAppState extends State<MainApp> {
     return MaterialApp(
       theme: ThemeData(
         primaryColor: Constants().primaryColor,
-        // backgroundColor: Constants().lightPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
       home: _isSignedIn ? const HomePage() : const LoginPage(),
     );
+  }
+}
+
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold();
   }
 }

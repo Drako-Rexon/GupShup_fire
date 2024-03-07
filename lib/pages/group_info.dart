@@ -51,10 +51,14 @@ class _GroupInfoState extends State<GroupInfo> {
     return Scaffold(
       backgroundColor: Constants().primaryColor,
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Constants().darkGrey,
         centerTitle: true,
         elevation: 0,
-        title: const Text("Group Info"),
+        title: const Text(
+          "Group Info",
+          style: TextStyle(color: Colors.white),
+        ),
         actions: [
           IconButton(
               onPressed: () {

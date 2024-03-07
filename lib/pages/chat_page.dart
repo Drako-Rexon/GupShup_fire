@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gupshup_firebase/pages/group_info.dart';
 import 'package:gupshup_firebase/pages/homepage.dart';
 import 'package:gupshup_firebase/service/database_service.dart';
+import 'package:gupshup_firebase/service/gemini_service.dart';
 import 'package:gupshup_firebase/shared/constants.dart';
 import 'package:gupshup_firebase/widgets/message_tile.dart';
 import 'package:gupshup_firebase/widgets/widgets.dart';
@@ -57,6 +60,7 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       backgroundColor: Constants().primaryColor,
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Constants().darkGrey,
         centerTitle: true,
         elevation: 0,
@@ -74,10 +78,46 @@ class _ChatPageState extends State<ChatPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(widget.groupName),
+                Text(
+                  widget.groupName,
+                  style: const TextStyle(color: Colors.white),
+                ),
               ],
             )),
         actions: [
+          IconButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      TextEditingController geminiController =
+                          TextEditingController();
+                      bool isLoadingResponse = false;
+                      return AlertDialog(
+                        title: const Text('Gemini Pro+'),
+                        content: TextField(
+                          controller: geminiController,
+                        ),
+                        actions: [
+                          TextButton(
+                              onPressed: () async {
+                                String text = await GeminiService.getResponse(
+                                    geminiController.text);
+                                setState(() {
+                                  messageController.clear();
+                                  messageController.text = text;
+                                  Navigator.pop(context);
+                                });
+                              },
+                              child: Text('OK'))
+                        ],
+                      );
+                    });
+              },
+              icon: const Icon(
+                Icons.text_increase,
+                color: Colors.white,
+              )),
           PopupMenuButton(itemBuilder: (context) {
             return [
               PopupMenuItem(
